@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .recipe {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .recipe h2 {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recipes</h1>
+    <div id="recipes"></div>
+
+    <!-- Buttons placed BEFORE the script runs -->
+    <button id="fetchRecipesBtn">Fetch Recipes</button>
+    <button id="fetchTopRatedRecipesBtn">Fetch Top Rated Recipes</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            async function fetchRecipes() {
+                const response = await fetch('http://127.0.0.1:8000/api/recipes');
+                const data = await response.json();
+                const recipesDiv = document.getElementById('recipes');
+                recipesDiv.innerHTML = '';
+
+                data.data.forEach(recipe => {
+                    const recipeDiv = document.createElement('div');
+                    recipeDiv.className = 'recipe';
+                    recipeDiv.innerHTML = `
+                        <h2>${recipe.title}</h2>
+                        <p>Cuisine: ${recipe.cuisine}</p>
+                        <p>Calories: ${recipe.nutrients.calories}</p>
+                        <p>Total Time: ${recipe.total_time} minutes</p>
+                        <p>Rating: ${recipe.rating}</p>
+                    `;
+                    recipesDiv.appendChild(recipeDiv);
+                });
+            }
+
+            async function fetchTopRatedRecipes() {
+                const response = await fetch('http://127.0.0.1:8000/api/recipes/search?title=chicken');
+                const data = await response.json();
+                const recipesDiv = document.getElementById('recipes');
+                recipesDiv.innerHTML = '';
+
+                data.data.forEach(recipe => {
+                    const recipeDiv = document.createElement('div');
+                    recipeDiv.className = 'recipe';
+                    recipeDiv.innerHTML = `
+                        <h2>${recipe.title}</h2>
+                        <p>Cuisine: ${recipe.cuisine}</p>
+                        <p>Calories: ${recipe.nutrients.calories}</p>
+                        <p>Total Time: ${recipe.total_time} minutes</p>
+                        <p>Rating: ${recipe.rating}</p>
+                    `;
+                    recipesDiv.appendChild(recipeDiv);
+                });
+            }
+
+            // Ensure buttons exist before adding event listeners
+            document.getElementById('fetchRecipesBtn').addEventListener('click', fetchRecipes);
+            document.getElementById('fetchTopRatedRecipesBtn').addEventListener('click', fetchTopRatedRecipes);
+
+            // Initial fetch
+            fetchRecipes();
+        });
+    </script>
+</body>
+</html>

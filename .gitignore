@@ -1,0 +1,8 @@
+cpe_dict/__pycache__
+cpe_dict/myvenv
+nvd/__pycache__
+nvd/myenv
+recipes/__pycache__
+cpe_dict/official-cpe-dictionary_v2.3.xml
+cpe_dict/xml.json
+recipes/myvenv

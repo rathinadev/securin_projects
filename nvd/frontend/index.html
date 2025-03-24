@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVE Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>CVE Management System</h1>
+
+    <!-- Sync Button -->
+    <button id="syncBtn">Sync CVE Data</button>
+    <p id="syncStatus"></p>
+
+    <!-- Filters -->
+    <div class="filters">
+        <input type="text" id="cveId" placeholder="Search CVE ID">
+        <input type="number" id="year" placeholder="Year">
+        <input type="number" id="minScore" placeholder="Min CVSS Score">
+        <input type="number" id="lastModifiedDays" placeholder="Last Modified Days">
+        <button id="filterBtn">Apply Filters</button>
+    </div>
+
+    <!-- Table for CVE Data -->
+    <table>
+        <thead>
+            <tr>
+                <th>CVE ID</th>
+                <th>Description</th>
+                <th>Published</th>
+                <th>Last Modified</th>
+                <th>CVSS Score</th>
+            </tr>
+        </thead>
+        <tbody id="cveTableBody"></tbody>
+    </table>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+        <button id="prevPage">Previous</button>
+        <span id="pageNumber">Page 1</span>
+        <button id="nextPage">Next</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
